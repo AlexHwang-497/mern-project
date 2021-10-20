@@ -13,8 +13,9 @@ export default (posts = [], action) => {
         case "DELETE":
             // *we are first going to get all the posts then we are going to filter out what we plan on  deleting
             //* post._id !== action.payload; we will then remove it
-
             return posts.filter((post) => post._id !== action.payload);
+        case 'LIKE':
+            return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
         default:
             return posts;
     }

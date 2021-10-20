@@ -57,3 +57,15 @@ export const updatePost = (id, post) => async (dispatch) => {
       console.log(error.message);
     }
   };
+
+  export const likePost = (id) => async (dispatch) => {
+    try {
+      const { data } = await api.likePost(id);
+      console.log('this is the data from likePost in actions/posts.js:',data)
+  
+      dispatch({ type: 'LIKE', payload: data });
+    } catch (error) {
+      console.log(error.message);
+      console.log('this is the error message from likePost',error)  
+    }
+  };
