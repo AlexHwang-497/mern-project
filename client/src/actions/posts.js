@@ -8,7 +8,7 @@ export const getPosts = () => async (dispatch) => {
     try{
         // *requesting all the data from the API
         const { data } = await api.fetchPosts();
-        console.log('this is the data taht is given in action/posts/ getposts:', data)
+        console.log('this is the data that is given from getposts in action/posts.js:', data)
         dispatch({ type: 'FETCH_ALL', payload: data });
 
 
@@ -32,3 +32,16 @@ export const createPost = (post) => async(dispatch) => {
         console.log(error.message)
     }   
 }
+
+export const updatePost = (id, post) => async (dispatch) => {
+    try {
+      const { data } = await api.updatePost(id, post);
+      console.log('this is the data from updatePost in actions/posts.js:',data)
+  
+      dispatch({ type: 'UPDATE', payload: data });
+    } catch (error) {
+    
+      console.log(error.message);
+      console.log('this is the error message from updatePost in actions/posts.js',error.message);
+    }
+  };
