@@ -7,7 +7,7 @@ import {getPosts} from './actions/posts'
 import memories from './images/memories.png'
 import Posts from './Components/Posts/Posts'
 import Form from './Components/Forms/Form'
-import useStyles from './styles' //////////////////
+import useStyles from './styles' //////////////////////////////////
 
 
 // *<Grow>; provides simple animation
