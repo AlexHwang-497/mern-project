@@ -12,12 +12,18 @@ import useStyles from './styles' //////////////////////////////////
 
 // *<Grow>; provides simple animation
 const App = () => {
+    // *this helps us find our currentId for each post
+    const [currentId, setCurrentId] = useState(null);
     const dispatch = useDispatch()
     const classes = useStyles()
 
     useEffect(()=> {
         dispatch(getPosts())
     },[dispatch])
+
+    // *<Posts setCurrentId={setCurrentId} /> and <Form currentId={currentId} setCurrentId={setCurrentId} /> this is dealing with prop drilling of the data
+        // *this gets sent to the Form.js where we take the props
+        // * we will alos utilize this as pops in posts.js as well
 
     return (
         <Container maxWidth='lg'>
@@ -31,10 +37,10 @@ const App = () => {
                 <Container>
                     <Grid container justifyContent='space-between' alignItems='stretch' spacing={3}>
                         <Grid item xs={12} sm={7}>
-                            <Posts/>
+                            <Posts setCurrentId={setCurrentId} />
                         </Grid>
                         <Grid item xs={12} sm={4}>
-                            <Form/>
+                            <Form currentId={currentId} setCurrentId={setCurrentId} />
                         </Grid>
                     </Grid>
                 </Container>
