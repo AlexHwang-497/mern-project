@@ -8,12 +8,23 @@ import { createPost,updatePost } from "../../actions/posts";
 
 const Form = ({ currentId, setCurrentId }) => {
     const [postData,setPostData] = useState({creator:'',title:'',message:'',selectedFile:''})
+    // *this allows us to get our id# that we want to update our post
+    const post = useSelector((state) => (currentId ? state.posts.find((p) => p._id === currentId) : null));
     const classes = useStyles()
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (post) setPostData(post);
+      }, [post]);
+    
+
+
+
+
     const handleSubmit = async(e) =>{
         e.preventDefault()
         if (currentId) {
-            // dispatch(updatePost(currentId, postData));
+            dispatch(updatePost(currentId, postData));
             // clear();
         } else {
             dispatch(createPost(postData));
