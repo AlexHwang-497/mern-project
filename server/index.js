@@ -3,11 +3,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import dotenv from 'dotenv'
 
 // ! why would you need a .js here?
 import postRoutes from './routes/posts.js';
 
 const app = express()
+dotenv.config()
 // *we are setting up the body parser to send our requests
 app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
@@ -20,10 +22,10 @@ app.use(cors());
 
 // *we will connect our server application with a real data base aka mongoDB
 
-const CONNECTION_URL='mongodb+srv://mrYellow123:PoopShit123@cluster0.imzng.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+
 const PORT = process.env.PORT || 5000
 
-mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     // * if connection is succesfful
     .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
     // *if connection is unnsuccessful
