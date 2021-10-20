@@ -4,15 +4,16 @@ import * as api from '../api/index'
 // ?these are the action creators below; action creators are functions that return actions
 
 // *getPosts = () => async(dispatch); the async(dispatch) is what thunk allows us to do 
-export const getPosts = () => async(dispatch) => {
+export const getPosts = () => async (dispatch) => {
     try{
         // *requesting all the data from the API
         const { data } = await api.fetchPosts();
-        dispatch({type:'FETCH_ALL', payload:data})
+        console.log('this is the data taht is given in action/posts/ getposts:', data)
+        dispatch({ type: 'FETCH_ALL', payload: data });
 
 
     } catch(error){
-        console.log(error.message)
+        console.log('this is the error message in actions/posts.js',error.message)
 
     }
     // *an action is an object that has a type and payload
@@ -26,6 +27,7 @@ export const createPost = (post) => async(dispatch) => {
         // *this is making a backend post to our server
         const {data} = await  api.createPost(post)
         dispatch({type:'CREATE', payload:data})
+        console.log('the post has been created in action/posts.js createPost:', data)
     } catch(error){
         console.log(error.message)
     }   

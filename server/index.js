@@ -1,16 +1,17 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import mongoose from 'mongoose'
-import cors from 'cors'
+
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import cors from 'cors';
 
 // ! why would you need a .js here?
 import postRoutes from './routes/posts.js';
 
 const app = express()
 // *we are setting up the body parser to send our requests
-app.use(bodyParser.json({limit:'30mb', exteneded:true}))
-app.use(bodyParser.urlencoded({limit:'30mb', exteneded:true}))
-app.use(cors())
+app.use(bodyParser.json({ limit: '30mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
+app.use(cors());
 
 // *what we have done here is we have set up every route aka postRoutes will start with '/posts'
     // * /posts; we setup all the routes inside of this post
@@ -22,11 +23,11 @@ app.use(cors())
 const CONNECTION_URL='mongodb+srv://mrYellow123:PoopShit123@cluster0.imzng.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000
 
-mongoose.connect(CONNECTION_URL, {useNewUrlParser:true, useUnifiedTopology:true})
+mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     // * if connection is succesfful
-    .then(()=> app.listen(PORT, ()=> console.log(`Server Running on Port: http://localhost:${PORT}`)))
+    .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
     // *if connection is unnsuccessful
-    .catch((error)=> console.log(`${error} did not connct`))
+    .catch((error) => console.log(`${error} did not connect`));
     // * we include this so we don't get warnings in the console---
-        // !we can't include the bottom it will crash the app
+        // !we can't include the bottom it will crash the app  ask carlos if this has anything to do with it?
     // mongoose.set('useFindAndModify', false);

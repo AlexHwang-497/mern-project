@@ -9,12 +9,13 @@ const router = express.Router()
 export const getPosts = async(req, res) => {
     try{
         // * we are retrieving all the messages in the database
-        const postMessages = await PostMessage.find()
+        const postMessages = await PostMessage.find();
         console.log('this is the postMessages from controllers->post.js',postMessages)
         console.log(postMessages)
-        res.status(200).json(postMessage)
+        res.status(200).json(postMessages);
     } catch (error){
-        res.status(404).json({message:error.message})
+        res.status(404).json({ message: error.message });
+        console.log('this is the error message from getPosts in server/controllers:',error.message)
     }
 }
 
