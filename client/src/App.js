@@ -19,7 +19,7 @@ const App = () => {
 
     useEffect(()=> {
         dispatch(getPosts())
-    },[dispatch])
+    },[currentId,dispatch])
 
     // *<Posts setCurrentId={setCurrentId} /> and <Form currentId={currentId} setCurrentId={setCurrentId} /> this is dealing with prop drilling of the data
         // *this gets sent to the Form.js where we take the props

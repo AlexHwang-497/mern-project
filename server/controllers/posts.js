@@ -1,6 +1,6 @@
 // * we are creating all the handlers for our routes in this componet
-import express from 'express'
 import mongoose from 'mongoose'
+import express from 'express'
 
 import PostMessage from '../models/postMessage.js'
 
@@ -43,7 +43,7 @@ export const updatePost = async (req, res) => {
 
     // *if the id is valid then we do the following
 
-    const updatedPost = await PostMessage.findByIdAndUpdate(_id, post, { new: true });
+    const updatedPost = await PostMessage.findByIdAndUpdate(_id, {...post, _id}, { new: true });
     console.log('this is what is given in updatedPost in server/controllers/posts.js',updatedPost)
     res.json(updatedPost);
     
