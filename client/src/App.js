@@ -14,7 +14,7 @@ import useStyles from './styles' //////////////////////////////////
 const App = () => {
     const dispatch = useDispatch()
     const classes = useStyles()
-
+// **************************************
     useEffect(()=> {
         dispatch(getPosts())
     },[dispatch])
