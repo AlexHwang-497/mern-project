@@ -18,7 +18,13 @@ app.use(cors());
 // *what we have done here is we have set up every route aka postRoutes will start with '/posts'
     // * /posts; we setup all the routes inside of this post
     // *hence we should see then .... localhost:5000/posts to all the routes in post.js
-    app.use('/posts', postRoutes);
+app.use('/posts', postRoutes);
+
+app.get('/',(req,res)=>{
+    res.send('Hello to memories API')
+})
+
+
 
 // *we will connect our server application with a real data base aka mongoDB
 
