@@ -30,7 +30,7 @@ const App = () => {
         
         
             <AppBar className={classes.appBar} position='static' color='inherit'>
-                <Typography className={classes.heading} variant='h2' align='center'>Stock Portolio Builder</Typography>
+                <Typography className={classes.heading} variant='h2' align='center'>Stock Portolio Builder; you left off at 1:00:56 on 10/19/2021</Typography>
                 <img className={classes.image} src={memories} alt="icon" height ="60"/>
             </AppBar>
             <Grow in>

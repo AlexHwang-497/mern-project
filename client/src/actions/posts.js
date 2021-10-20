@@ -1,3 +1,4 @@
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 // *   import*; this means we import everything from the actions
 import * as api from '../api/index'
 
@@ -9,7 +10,7 @@ export const getPosts = () => async (dispatch) => {
         // *requesting all the data from the API
         const { data } = await api.fetchPosts();
         console.log('this is the data that is given from getposts in action/posts.js:', data)
-        dispatch({ type: 'FETCH_ALL', payload: data });
+        dispatch({ type: FETCH_ALL, payload: data });
 
 
     } catch(error){
@@ -26,7 +27,7 @@ export const createPost = (post) => async(dispatch) => {
     try{
         // *this is making a backend post to our server
         const {data} = await  api.createPost(post)
-        dispatch({type:'CREATE', payload:data})
+        dispatch({type: CREATE, payload:data})
         console.log('the post has been created in action/posts.js createPost:', data)
     } catch(error){
         console.log(error.message)
@@ -38,7 +39,7 @@ export const updatePost = (id, post) => async (dispatch) => {
       const { data } = await api.updatePost(id, post);
       console.log('this is the data from updatePost in actions/posts.js:',data)
   
-      dispatch({ type: 'UPDATE', payload: data });
+      dispatch({ type: UPDATE, payload: data });
     } catch (error) {
     
       console.log(error);
@@ -51,7 +52,7 @@ export const updatePost = (id, post) => async (dispatch) => {
     try {
       await api.deletePost(id);
   
-      dispatch({ type: 'DELETE', payload: id });
+      dispatch({ type: DELETE, payload: id });
     } catch (error) {
       console.log('this is the error message from deletePost',error)  
       console.log(error.message);
@@ -63,7 +64,7 @@ export const updatePost = (id, post) => async (dispatch) => {
       const { data } = await api.likePost(id);
       console.log('this is the data from likePost in actions/posts.js:',data)
   
-      dispatch({ type: 'LIKE', payload: data });
+      dispatch({ type: LIKE, payload: data });
     } catch (error) {
       console.log(error.message);
       console.log('this is the error message from likePost',error)  
