@@ -26,7 +26,7 @@ app.get('/',(req,res)=>{
 
 
 
-// *we will connect our server application with a real data base aka mongoDB
+// *we will connect our server application with a real data base aka mongoDB/////////
 
 
 const PORT = process.env.PORT || 5000
