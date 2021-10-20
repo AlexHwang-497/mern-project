@@ -1,48 +1,27 @@
-import React, {useState, useEffect} from 'react'
-import {Container, AppBar, Grow, Grid, Typography} from '@material-ui/core'
-// *this allows us to dispatch an action
-import { useDispatch } from 'react-redux';
+import React from 'react'
+import {Container} from '@material-ui/core'
+// *this will allow us to use LINK
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import {getPosts} from './actions/posts'
 
-import Posts from './Components/Posts/Posts'
-import Form from './Components/Forms/Form'
 import useStyles from './styles' 
 import Navbar from './Navbar/Navbar';
+import Home from './Home/Home';
+import Auth from './Auth/Auth';
 
 
 // *<Grow>; provides simple animation
 const App = () => {
-    // *this helps us find our currentId for each post
-    const [currentId, setCurrentId] = useState(null);
-    const dispatch = useDispatch()
-    const classes = useStyles()
-
-    useEffect(()=> {
-        dispatch(getPosts())
-    },[currentId,dispatch])
-
-    // *<Posts setCurrentId={setCurrentId} /> and <Form currentId={currentId} setCurrentId={setCurrentId} /> this is dealing with prop drilling of the data
-        // *this gets sent to the Form.js where we take the props
-        // * we will alos utilize this as pops in posts.js as well
-
     return (
-        <Container maxWidth='lg'>
-            <Navbar/>
-            <Grow in>
-                <Container>
-                    <Grid container justifyContent='space-between' alignItems='stretch' spacing={3}>
-                        <Grid item xs={12} sm={7}>
-                            <Posts setCurrentId={setCurrentId} />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <Form currentId={currentId} setCurrentId={setCurrentId} />
-                        </Grid>
-                    </Grid>
-                </Container>
-            </Grow>
-        </Container>
-    
+        <BrowserRouter>
+            <Container maxWidth='lg'>
+                <Navbar/>
+                <Switch>
+                    <Route path ="/" exact component={Home}/>
+                    <Route path ="/auth" exact component={Auth}/>
+                </Switch>
+            </Container>
+        </BrowserRouter>
     )
 }
 export default App
