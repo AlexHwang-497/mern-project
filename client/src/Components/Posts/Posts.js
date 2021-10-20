@@ -13,7 +13,7 @@ const Posts = ({ setCurrentId }) => {
     const posts = useSelector((state)=>state.posts)
     const classes = useStyles()
 
-    console.log('these are the posts in posts.js',posts)
+    console.log('these are the posts in Posts/posts.js',posts)
 
 
     return (
