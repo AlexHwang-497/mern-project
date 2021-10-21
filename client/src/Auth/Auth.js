@@ -41,16 +41,19 @@ const Auth = () => {
 
   const googleSuccess = async (res) => {
       console.log('this is the res in googleSuccess in Auth.js:',res)
-    // const result = res?.profileObj;
-    // const token = res?.tokenId;
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+    console.log('this is the result in googleSuccess in Auth.js:',result)
+    console.log('this is the token in googleSuccess in Auth.js:',token)
 
-    // try {
-    // //   dispatch({ type: AUTH, data: { result, token } });
-
-    //   history.push('/');
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+        // * this is the payload :data: { result, token } }
+      dispatch({ type: "AUTH", data: { result, token } });
+    // *  this pushes us back to our homepage
+      history.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
 

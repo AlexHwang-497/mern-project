@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import {Link} from 'react-router-dom'
+import decode from 'jwt-decode';
 
 import useStyles from './styles'
 import memories from '../images/memories.png'
@@ -8,7 +9,26 @@ import memories from '../images/memories.png'
 const Navbar = () =>{
     const classes=useStyles()
 
-    const user = null
+    // *this allows us to get our userId from authetentication
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    console.log('this is the user from navbar.js',user)
+
+    useEffect(() => {
+        // *we are checking if the token exists
+        const token = user?.token;
+        
+        setUser(JSON.parse(localStorage.getItem('profile')));
+        // if (token) {
+        //   const decodedToken = decode(token);
+    
+        //   if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+        // }
+    
+      }, []);
+
+
+
+
     const logout =null
     
     return(
