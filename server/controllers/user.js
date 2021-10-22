@@ -29,6 +29,7 @@ export const signin = async (req, res) => {
 
     res.status(200).json({ result: existingUser, token });
   } catch (err) {
+    console.log('this is the error in signin',err)
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -37,7 +38,7 @@ export const signup = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await UserModal.findOne({ email });
 
     if (existingUser) return res.status(400).json({ message: "User already exists" });
 
@@ -45,12 +46,13 @@ export const signup = async (req, res) => {
     //* 12; this is salt aka how hard you want to make the password
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const result = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
+    const result = await UserModal.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
 
     const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
 
     res.status(201).json({ result, token });
   } catch (error) {
+    console.log('this is the error in signup in server/controllers/user.js')
     res.status(500).json({ message: "Something went wrong" });
     
     console.log(error);
