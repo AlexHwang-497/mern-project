@@ -6,22 +6,39 @@ import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 import Icon from './icon';
-// import { signin, signup } from '../../actions/auth';
-// import { AUTH } from '../../constants/actionTypes';
+import { signin, signup } from '../actions/auth';
+import { AUTH } from '../constants/actionTypes';
 import useStyles from './styles';
 import Input from './Input';
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 const Auth = () => {
-const [form, setForm] = useState(initialState);
+  const classes = useStyles();
+  const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-  const classes = useStyles();
+  const [form, setForm] = useState(initialState);
 
-  const [showPassword, setShowPassword] = useState(false);
 //   *this will toggle the state of the password
   const handleShowPassword = () => setShowPassword(!showPassword);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('this is the handleSubmit in Auth.js',form)
+
+    if (isSignup) {
+      // *we pass in the history to help us navigate once something happens
+        dispatch(signup(form, history));
+    } else {
+        dispatch(signin(form, history));
+    }
+  };
+  // const handleChange =''
+  // *[e.target.name]: e.target.value ; this is just handling the current target name aka email edress
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+
 
   const switchMode = () => {
     setForm(initialState);
@@ -29,15 +46,6 @@ const [form, setForm] = useState(initialState);
     setShowPassword(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (isSignup) {
-    //   dispatch(signup(form, history));
-    } else {
-    //   dispatch(signin(form, history));
-    }
-  };
 
   const googleSuccess = async (res) => {
       console.log('this is the res in googleSuccess in Auth.js:',res)
@@ -64,8 +72,7 @@ const [form, setForm] = useState(initialState);
       
   }
 
-//   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleChange =''
+//
 
 
 
