@@ -4,13 +4,16 @@ const authReducer = (state = { authData: null }, action) => {
   switch (action.type) {
     case AUTH:
       console.log('this is the actionType.AUTH of action.data in reducers/auth.js:',action?.data)
-      
       // *we are setting all the data for the login in local storage      
       localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
-      
       return { ...state, authData: action?.data};
       // return { ...state, authData: action.data, loading: false, errors: null };
-    
+
+    case LOGOUT:
+      localStorage.clear();
+      return { ...state, authData: null};
+      // return { ...state, authData: null, loading: false, errors: null };
+
     default:
       return state;
   }

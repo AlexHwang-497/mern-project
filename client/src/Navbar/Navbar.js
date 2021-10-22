@@ -14,6 +14,7 @@ const Navbar = () =>{
     console.log('this is the user from navbar.js',user)
 
     const dispatch = useDispatch();
+    // *we utilize this to deal with the change in our URL from '/auth' to '/'
   const location = useLocation();
   const history = useHistory();
   const classes = useStyles();
@@ -21,13 +22,13 @@ const Navbar = () =>{
   const logout = () => {
       dispatch({ type: 'LOGOUT' });
   
-      history.push('/auth');
+      history.push('/');
   
       setUser(null);
     };
 
     // *this allows us to get our userId from authetentication
-
+      // *in addition, this will allow our logout button to pop up so we don't have to refresh
     useEffect(() => {
         // *we are checking if the token exists
         const token = user?.token;
@@ -39,7 +40,7 @@ const Navbar = () =>{
         //   if (decodedToken.exp * 1000 < new Date().getTime()) logout();
         // }
     
-      }, []);
+      }, [location]);
 
 
 
@@ -49,7 +50,7 @@ const Navbar = () =>{
     return(
         <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
-        <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Memories;  you currenlty left off at 1:13:37;  you are trying to figure out why logout is not poppuin up</Typography>
+        <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Memories</Typography>
         <img className={classes.image} src={memories} alt="icon" height="60" />
       </div>
       <Toolbar className={classes.toolbar}>
