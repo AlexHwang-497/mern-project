@@ -10,10 +10,10 @@ import Icon from './icon';
 // import { AUTH } from '../../constants/actionTypes';
 import useStyles from './styles';
 import Input from './Input';
-
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 const Auth = () => {
-    // const [form, setForm] = useState(initialState);
+const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -24,7 +24,7 @@ const Auth = () => {
   const handleShowPassword = () => setShowPassword(!showPassword);
 
   const switchMode = () => {
-    // setForm(initialState);
+    setForm(initialState);
     setIsSignup((prevIsSignup) => !prevIsSignup);
     setShowPassword(false);
   };
@@ -41,14 +41,14 @@ const Auth = () => {
 
   const googleSuccess = async (res) => {
       console.log('this is the res in googleSuccess in Auth.js:',res)
-    const result = res?.profileObj;
-    const token = res?.tokenId;
+      const result = res?.profileObj;
+      const token = res?.tokenId;
     console.log('this is the result in googleSuccess in Auth.js:',result)
     console.log('this is the token in googleSuccess in Auth.js:',token)
 
     try {
         // * this is the payload :data: { result, token } }
-      dispatch({ type: "AUTH", data: { result, token } });
+        dispatch({ type: 'AUTH', data: { result, token } });
     // *  this pushes us back to our homepage
       history.push('/');
     } catch (error) {

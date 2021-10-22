@@ -10,7 +10,7 @@ import useStyles from './styles';
 
 
 const Navbar = () =>{
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     console.log('this is the user from navbar.js',user)
 
     const dispatch = useDispatch();
@@ -18,28 +18,28 @@ const Navbar = () =>{
   const history = useHistory();
   const classes = useStyles();
 
-  const logout = () => {
-      dispatch({ type: 'LOGOUT' });
-  
-      history.push('/auth');
-  
-      setUser(null);
-    };
+    const logout = () => {
+        dispatch({ type: 'LOGOUT' });
+    
+        history.push('/auth');
+    
+        setUser(null);
+      };
 
     // *this allows us to get our userId from authetentication
 
-    useEffect(() => {
-        // *we are checking if the token exists
-        const token = user?.token;
+    // useEffect(() => {
+    //     // *we are checking if the token exists
+    //     const token = user?.token;
         
-        setUser(JSON.parse(localStorage.getItem('profile')));
-        // if (token) {
-        //   const decodedToken = decode(token);
+    //     setUser(JSON.parse(localStorage.getItem('profile')));
+    //     // if (token) {
+    //     //   const decodedToken = decode(token);
     
-        //   if (decodedToken.exp * 1000 < new Date().getTime()) logout();
-        // }
+    //     //   if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    //     // }
     
-      }, []);
+    //   }, []);
 
 
 
