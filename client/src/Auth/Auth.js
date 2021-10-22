@@ -10,7 +10,7 @@ import { signin, signup } from '../actions/auth';
 import { AUTH } from '../constants/actionTypes';
 import useStyles from './styles';
 import Input from './Input';
-const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }; /////////////
 
 const Auth = () => {
   const classes = useStyles();
