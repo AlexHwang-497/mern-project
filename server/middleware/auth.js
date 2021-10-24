@@ -9,6 +9,7 @@ const secret = 'test';
 //* next; this means do something and move onto the next thing
 const auth = async (req, res, next) => {
   try {
+    console.log('this is the req.headers in auth of middleware/auth.js',req.headers)
     const token = req.headers.authorization.split(" ")[1];
     // *this will help us determine if this our own Auth or the google one
     const isCustomAuth = token.length < 500;

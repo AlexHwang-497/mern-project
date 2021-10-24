@@ -51,8 +51,8 @@ const Auth = () => {
       console.log('this is the res in googleSuccess in Auth.js:',res)
       const result = res?.profileObj;
       const token = res?.tokenId;
-    console.log('this is the result in googleSuccess in Auth.js:',result)
-    console.log('this is the token in googleSuccess in Auth.js:',token)
+    console.log('this is the result aka res?.profileObj in googleSuccess in Auth.js:',result)
+    console.log('this is the token aka res?.tokenId in googleSuccess in Auth.js:',token)
 
     try {
         // * this is the payload :data: { result, token } }
@@ -68,12 +68,9 @@ const Auth = () => {
   const googleError = (error) => {
       console.log('this is the googleError in Auth.js:','Google Sign In was unsuccessful. Try again later')
       console.log('this is the googleError in Auth.js:',error)
-    //   alert('Google Sign In was unsuccessful. Try again later');
+      alert('Google Sign In was unsuccessful. Try again later');
       
   }
-
-//
-
 
 
     return (

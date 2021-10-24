@@ -12,6 +12,7 @@ import useStyles from './Styles'
 // *<CardMedia className={classes.media} image={post.selectedFile} title={post.title} />; the posts here are taken from props
 // *<Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>; this will tell us on our card like 5min or 5s ago
 // * post.tags.map((tag) => `#${tag} `); we are looping through our tags and putting "#" on them
+// *<Typography variant="h6">{post.name}</Typography>; this is now the id of the creator
 const Post = ({ post, setCurrentId }) => {
     const dispatch = useDispatch();
     const classes = useStyles()
@@ -19,7 +20,7 @@ const Post = ({ post, setCurrentId }) => {
         <Card className={classes.card}>
           <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
           <div className={classes.overlay}>
-            <Typography variant="h6">{post.creator}</Typography>
+            <Typography variant="h6">{post.name}</Typography>
             <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
           </div>
           <div className={classes.overlay2}>
