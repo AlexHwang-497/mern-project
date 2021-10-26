@@ -13,6 +13,7 @@ export const signin = async (req, res) => {
   console.log('this is req.body in sigin of servers/controllers/user.js:',req.body)
 
   try {
+    // *with this we are finding the existingUser by email
     const existingUser = await UserModal.findOne({ email });
 
     if (!existingUser) return res.status(404).json({ message: "User doesn't exist" });
@@ -35,7 +36,8 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  const { email, password, confirmPassword, firstName, lastName } = req.body;
+  const { id, email, password, confirmPassword, firstName, lastName } = req.body;
+  console.log('this is the req.body in signup',req.body)
 
   try {
     const existingUser = await UserModal.findOne({ email });
@@ -48,7 +50,7 @@ export const signup = async (req, res) => {
 
     const result = await UserModal.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
 
-    const token = jwt.sign( { id: result._id,email: result.email  }, secret, { expiresIn: "1h" } );
+    const token = jwt.sign( { email: result.email, id: result._id }, 'test', { expiresIn: "1h" } );
     console.log('this is the token from signup in servers/controllers/user.js',token)
 
     res.status(201).json({ result, token });

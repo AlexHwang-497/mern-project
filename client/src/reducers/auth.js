@@ -12,6 +12,7 @@ const authReducer = (state = { authData: null }, action) => {
       // return { ...state, authData: action.data, loading: false, errors: null };
 
     case LOGOUT:
+      // *this will clear out our Id in the application/localstorage:3000 tab in inspect window
       localStorage.clear();
       return { ...state, authData: null};
       // return { ...state, authData: null, loading: false, errors: null };

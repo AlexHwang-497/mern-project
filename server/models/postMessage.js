@@ -9,15 +9,11 @@ const postSchema = mongoose.Schema({
     tags: [String],
     // *we are converting an image into a string using the base 64
     selectedFile: String,
-    likes: {
-        type: [String],
-        default: [],
-    },
+    likes: { type: [String], default: [] },
     createdAt: {
         type: Date,
         default: new Date(),
     },
-
 })
 
 // * this allows us to creat our model

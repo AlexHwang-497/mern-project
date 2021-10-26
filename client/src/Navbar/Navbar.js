@@ -3,6 +3,7 @@ import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
+import fetchStockPrice from '../StockData/FetchStockPrices'; 
 
 import memories from '../images/memories.png';
 // import * as actionType from '../../constants/actionTypes';
@@ -15,6 +16,7 @@ const Navbar = () =>{
 
     const dispatch = useDispatch();
     // *we utilize this to deal with the change in our URL from '/auth' to '/'
+      //* this will also help give us our google user icon as well in the navBar 
   const location = useLocation();
   const history = useHistory();
   const classes = useStyles();
@@ -23,6 +25,7 @@ const Navbar = () =>{
       dispatch({ type: 'LOGOUT' });
   
       history.push('/');
+      // history.push('/auth');
   
       setUser(null);
     };
@@ -34,11 +37,11 @@ const Navbar = () =>{
         const token = user?.token;
         
         setUser(JSON.parse(localStorage.getItem('profile')));
-        // if (token) {
-        //   const decodedToken = decode(token);
+        if (token) {
+          const decodedToken = decode(token);
     
-        //   if (decodedToken.exp * 1000 < new Date().getTime()) logout();
-        // }
+          if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+        }
     
       }, [location]);
 
@@ -48,9 +51,9 @@ const Navbar = () =>{
     
     
     return(
-        <AppBar className={classes.appBar} position="static" color="inherit">
+      <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
-        <Typography component={Link} to="/" className={classes.heading} variant="h5" align="center">Memories; left off at 2:07:54; you might need to tdouble check the result.  because you were not provied an ID#</Typography>
+        <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Memories; we are good up until 1:51:50</Typography>
         <img className={classes.image} src={memories} alt="icon" height="60" />
       </div>
       <Toolbar className={classes.toolbar}>
@@ -64,8 +67,9 @@ const Navbar = () =>{
           <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
         )}
       </Toolbar>
+    
     </AppBar>
     )
-}
-
-export default Navbar
+  }
+  
+  export default Navbar

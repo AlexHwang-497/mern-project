@@ -7,7 +7,7 @@ const API = axios.create({ baseURL: 'http://localhost:5000' });
 
 // *this is going to be a function that happens on each one of our requests
   // *we need this so our back end and middleware can actually verify that we are logged in
-API.interceptors.request.use((req) => {
+  API.interceptors.request.use((req) => {
   // *if this exists....
   if (localStorage.getItem('profile')) {
   // * then we want to add req.headers 
@@ -15,7 +15,6 @@ API.interceptors.request.use((req) => {
     req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
     console.log('this is the API Interceptor request in api/index.js',req.headers.Authorization)
   }
-
   return req;
 });
 

@@ -9,6 +9,7 @@ export default (posts = [], action) => {
         case UPDATE:
             // *if the post._id is === the action.payload._id(whicih is the updatedd post); then we return the action.payload
                 // *action.payload is the newly updated post
+            // return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
             return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
         case DELETE:
             // *we are first going to get all the posts then we are going to filter out what we plan on  deleting

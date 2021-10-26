@@ -13,7 +13,7 @@ import Input from './Input';
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }; /////////////
 
 const Auth = () => {
-    const [formData, setFormData] = useState(initialState);
+    const [form, setForm] = useState(initialState);
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
@@ -25,24 +25,23 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('this is the handleSubmit in Auth.js',formData)
+    console.log('this is the handleSubmit in Auth.js',form)
 
     if (isSignup) {
       // *we pass in the history to help us navigate once something happens
-        dispatch(signup(formData, history));
+        dispatch(signup(form, history));
     } else {
-        dispatch(signin(formData, history));
+        dispatch(signin(form, history));
     }
   };
   // const handleChange =''
   // *[e.target.name]: e.target.value ; this is just handling the current target name aka email edress
-    //   *this going to allow us to spread all the properties and change the one specific property we want to change
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
 
 
   const switchMode = () => {
-    setFormData(initialState);
+    setForm(initialState);
     setIsSignup((prevIsSignup) => !prevIsSignup);
     setShowPassword(false);
   };

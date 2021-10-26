@@ -10,8 +10,8 @@ export const getPosts = async(req, res) => {
     try{
         // * we are retrieving all the messages in the database
         const postMessages = await PostMessage.find();
-        console.log('this is the postMessages from controllers->post.js',postMessages)
-        console.log(postMessages)
+        // console.log('this is the postMessages from controllers->post.js',postMessages)
+        // console.log(postMessages)
         res.status(200).json(postMessages);
     } catch (error){
         res.status(404).json({ message: error.message });
@@ -22,16 +22,17 @@ export const getPosts = async(req, res) => {
 export const createPost = async(req,res) => {
     const post = req.body
 
-    console.log('this is the req.body in createPost of server/controllers/posts.js',post)
+    // console.log('this is the req.body in createPost of server/controllers/posts.js',post)
 
     const newPostMessage = new PostMessage({ ...post, creator: req.userId, createdAt: new Date().toISOString() })
 
-
     try{
-        await newPost.save()
-        res.status(201).json(newPost)
+        await newPostMessage.save();
+        return res.json(newPostMessage)
     } catch(error){
-        res.status(409).json({message:error.message})
+        console.log('this is the error in createpost in the server/controllers/posts.js:',error)
+        return res.status(409).json({message:error.message})
+
     }
 }
 
@@ -89,19 +90,22 @@ export const likePost = async (req, res) => {
     console.log('this is the req.params in like post of controllers/posts.js:', req.params)
     
 
-    if (!req.userId) {return res.json({ message: "Unauthenticated" })}
+    if (!req.userId) {return res.json({ message: "Unauthenticated" });}
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id`);
     const post = await PostMessage.findById(id);
-    // * this helps us determine if the use has already liked the post
+
+    // * this helps us determine if the use has already liked the post;  it will see if the userID is already in the post.  
     const index = post.likes.findIndex((id) => id ===String(req.userId));
+
     if (index === -1) {
+        //* we  are pushing the ID if it is not there orignially
         post.likes.push(req.userId);
       } else {
         //   *this is going to return us the array of all the likes besides the person's current likes
         post.likes = post.likes.filter((id) => id !== String(req.userId));
       }
-      const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
       
     res.json(updatedPost);
 }
